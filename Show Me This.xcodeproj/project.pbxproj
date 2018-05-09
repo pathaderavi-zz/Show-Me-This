@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		405FC28720A298D300763E38 /* SqueezeNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 405FC28620A298D300763E38 /* SqueezeNet.mlmodel */; };
+		405FC28920A29A3100763E38 /* MobileNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 405FC28820A29A3100763E38 /* MobileNet.mlmodel */; };
 		40DB17F22099F2B4002AEC9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DB17F12099F2B4002AEC9A /* AppDelegate.swift */; };
 		40DB17F42099F2B4002AEC9A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DB17F32099F2B4002AEC9A /* ViewController.swift */; };
 		40DB17F72099F2B4002AEC9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40DB17F52099F2B4002AEC9A /* Main.storyboard */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		405FC28620A298D300763E38 /* SqueezeNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SqueezeNet.mlmodel; sourceTree = "<group>"; };
+		405FC28820A29A3100763E38 /* MobileNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNet.mlmodel; sourceTree = "<group>"; };
 		40DB17EE2099F2B4002AEC9A /* Show Me This.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Show Me This.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		40DB17F12099F2B4002AEC9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40DB17F32099F2B4002AEC9A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +60,8 @@
 			children = (
 				40DB17F12099F2B4002AEC9A /* AppDelegate.swift */,
 				40DB17F32099F2B4002AEC9A /* ViewController.swift */,
+				405FC28820A29A3100763E38 /* MobileNet.mlmodel */,
+				405FC28620A298D300763E38 /* SqueezeNet.mlmodel */,
 				40DB17F52099F2B4002AEC9A /* Main.storyboard */,
 				40DB17F82099F2B8002AEC9A /* Assets.xcassets */,
 				40DB17FA2099F2B8002AEC9A /* LaunchScreen.storyboard */,
@@ -135,7 +141,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				405FC28920A29A3100763E38 /* MobileNet.mlmodel in Sources */,
 				40DB17F42099F2B4002AEC9A /* ViewController.swift in Sources */,
+				405FC28720A298D300763E38 /* SqueezeNet.mlmodel in Sources */,
 				40DB17F22099F2B4002AEC9A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -281,7 +289,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VRZW89MF7Y;
+				DEVELOPMENT_TEAM = 3458EK872K;
 				INFOPLIST_FILE = "Show Me This/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -299,7 +307,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VRZW89MF7Y;
+				DEVELOPMENT_TEAM = 3458EK872K;
 				INFOPLIST_FILE = "Show Me This/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
