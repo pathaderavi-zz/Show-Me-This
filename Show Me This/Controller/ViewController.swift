@@ -22,15 +22,22 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! UITableViewCell
-        cell.textLabel?.text = tuple[indexPath.row].key + " -> " + String(tuple[indexPath.row].value * 100) + " %"
+        cell.textLabel?.text = tuple[indexPath.row].key //+ " -> " + String(tuple[indexPath.row].value * 100) + " %"
+        cell.detailTextLabel?.text = String(tuple[indexPath.row].value * 100) + " %"
+        
         cell.textLabel?.adjustsFontSizeToFitWidth = true
         return cell
+    }
+    var query : String?
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        query = tableView.cellForRow(at: indexPath)?.textLabel?.text
+        self.performSegue(withIdentifier: "cameraDetected", sender: tableView.cellForRow(at: indexPath))
     }
     
     @IBOutlet weak var previewView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.navigationBar.prefersLargeTitles = false
         let captureSession = AVCaptureSession()
         //captureSession.sessionPreset = .photo
         confidenceTableView.delegate = self
@@ -72,19 +79,20 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         
         let pBuffer : CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
-        guard let model = try? VNCoreMLModel(for:SqueezeNet().model) else {return}
+        guard let model = try? VNCoreMLModel(for:MobileNet()    .model) else {return}
         let request = VNCoreMLRequest(model: model) { (request, error) in
             guard let results = request.results as? [VNClassificationObservation] else {return}
             
             guard let first = results.first else {return}
             //print(first.identifier,first.confidence)
-            if let value = self.fetchedElements[first.identifier] {
+            let name = String(first.identifier.split(separator: ",").first!)
+            if let value = self.fetchedElements[name] {
                 if first.confidence > value {
-                    let name = String(first.identifier.split(separator: ",").first!)
+                    //let name = String(first.identifier.split(separator: ",").first!)
                     self.fetchedElements[name] = first.confidence
                 }
             }else {
-                let name = String(first.identifier.split(separator: ",").first!)
+                //let name = String(first.identifier.split(separator: ",").first!)
                 self.fetchedElements[name] = first.confidence
             }
             self.tuple = Array(self.fetchedElements).sorted(by: {$0.value > $1.value})
@@ -103,7 +111,14 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             previewLayer?.frame = CGRect(x: 0, y: 0, width: view.frame.width/2, height: view.frame.height)
         }
     }
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "cameraDetected"{
+            if let resultsController = segue.destination as? WolframImagesController{
+                resultsController.searchQuery = query
+            }
+        }
+        print([1,2,3].map{$0 == 1})
+    }
     
 }
 
