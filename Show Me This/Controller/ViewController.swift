@@ -79,7 +79,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         
         let pBuffer : CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
-        guard let model = try? VNCoreMLModel(for:MobileNet()    .model) else {return}
+        guard let model = try? VNCoreMLModel(for:MobileNet().model) else {return}
         let request = VNCoreMLRequest(model: model) { (request, error) in
             guard let results = request.results as? [VNClassificationObservation] else {return}
             
@@ -113,8 +113,10 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "cameraDetected"{
-            if let resultsController = segue.destination as? WolframImagesController{
-                resultsController.searchQuery = query
+            if let navController = segue.destination as? UINavigationController{
+                if let resultsController = navController.viewControllers[0] as? WolframImagesController{
+                    resultsController.searchQuery = query
+                }
             }
         }
         print([1,2,3].map{$0 == 1})

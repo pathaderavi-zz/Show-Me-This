@@ -16,7 +16,7 @@ class FirstViewController: UIViewController {
     let speechRecognizer = SFSpeechRecognizer()
     var request = SFSpeechAudioBufferRecognitionRequest()
     var recognitionTask : SFSpeechRecognitionTask?
-
+    
     var segueBool = true
     
     @IBOutlet weak var speechLabel: UILabel!
@@ -107,7 +107,7 @@ class FirstViewController: UIViewController {
                                 self.workItem?.cancel()
                             }
                             self.workItem = DispatchWorkItem {
-        
+                                
                                 if count == 0 {
                                     self.query = result?.bestTranscription.formattedString
                                     self.performSegue(withIdentifier: "micSegue", sender: self.detectSpeechButton)
@@ -146,8 +146,11 @@ class FirstViewController: UIViewController {
         workItem?.cancel()
         
         if segue.identifier == "micSegue" {
-            if let resultsController = segue.destination as? WolframImagesController{
-                resultsController.searchQuery = query
+        
+            if let navController = segue.destination as? UINavigationController{
+                if let resultsController = navController.viewControllers[0] as? WolframImagesController{
+                    resultsController.searchQuery = query
+                }
             }
         }
     }
